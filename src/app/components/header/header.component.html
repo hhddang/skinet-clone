@@ -1,35 +1,67 @@
-<header class="flex h-[100px] px-8 justify-between items-center shadow">
+<header
+  class="flex px-2 justify-between items-center shadow fixed bg-white w-full h-[var(--mobile-header-height)] md:px-8 md:flex-row md:h-[var(--header-height)]"
+>
   <!-- Logo -->
-  <a href="#" routerLink="/" class="w-[170px] h-[65px]">
-    <img src="./assets/images/logo.png" alt="logo" />
+  <a href="#" routerLink="/">
+    <img src="./assets/images/logo.png" alt="logo" class="w-[170px] h-[65px]" />
   </a>
 
   <!-- Nav -->
-  <nav class="flex gap-5 text-xl font-medium">
-    <a
-      href="#"
-      routerLink="/"
-      [ngStyle]="{
-        color: activePath == '/' ? 'var(--primary)' : 'currentColor'
-      }"
-      >HOME</a
-    >
-    <a
-      href="#"
-      routerLink="/shop"
-      [ngStyle]="{
-        color: activePath == '/shop' ? 'var(--primary)' : 'currentColor'
-      }"
-      >SHOP</a
-    >
+  <nav class="hidden md:flex gap-5 text-xl font-medium">
+    <app-nav-item path="/" text="HOME" />
+    <app-nav-item path="/shop" text="SHOP" />
   </nav>
 
   <!-- Buttons -->
-  <div class="flex items-center">
+  <div class="hidden md:flex items-center">
     <a href="#" routerLink="/cart" class="mr-12">
       <mat-icon class="text-[#772953] text-4xl">shopping_cart</mat-icon>
     </a>
     <a href="#" routerLink="/login" class="hover-btn mr-4">Login</a>
     <a href="#" routerLink="/signup" class="hover-btn">Sign up</a>
+  </div>
+
+  <!-- Phone navigation icon -->
+  <button class="md:hidden top-0 right-0" (click)="toggleMobileNav()">
+    <mat-icon class="text-[#772953] text-4xl">horizontal_split</mat-icon>
+  </button>
+
+  <!-- Phone navigation -->
+  <div
+    class="absolute md:hidden top-full left-0 h-screen w-full bg-gray-100"
+    [ngStyle]="{ display: openMobileNav ? 'block' : 'none' }"
+  >
+    <div class="flex flex-col">
+      <app-nav-item
+        path="/"
+        text="HOME"
+        class="phone-nav-item"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/shop"
+        text="SHOP"
+        class="phone-nav-item"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/cart"
+        text="CART"
+        class="phone-nav-item"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/login"
+        text="LOGIN"
+        class="phone-nav-item"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/signup"
+        text="SIGN UP"
+        class="phone-nav-item"
+        (click)="toggleMobileNav()"
+      />
+    </div>
   </div>
 </header>

@@ -1,0 +1,10 @@
+<a
+  href="#"
+  routerLink="{{ path }}"
+  [ngStyle]="{
+    color: path == activePath ? 'var(--primary)' : 'currentColor'
+  }"
+  class="{{ class }}"
+>
+  {{ text }}
+</a>

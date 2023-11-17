@@ -9,6 +9,7 @@ import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavItemComponent } from './components/nav-item/nav-item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomePageComponent,
     ShopPageComponent,
     CartPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavItemComponent
   ],
   imports: [
     BrowserModule,

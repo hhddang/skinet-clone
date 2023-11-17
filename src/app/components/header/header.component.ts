@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +6,9 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  activePath: string = '/';
+  openMobileNav: boolean = false;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.activePath = event.url;
-      }
-    });
-  }
+  toggleMobileNav = () => {
+    this.openMobileNav = this.openMobileNav == false ? true : false;
+  };
 }
