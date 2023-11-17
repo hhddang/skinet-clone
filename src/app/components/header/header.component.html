@@ -1,1 +1,35 @@
-<p>header works!</p>
+<header class="flex h-[100px] px-8 justify-between items-center shadow">
+  <!-- Logo -->
+  <a href="#" routerLink="/" class="w-[170px] h-[65px]">
+    <img src="./assets/images/logo.png" alt="logo" />
+  </a>
+
+  <!-- Nav -->
+  <nav class="flex gap-5 text-xl font-medium">
+    <a
+      href="#"
+      routerLink="/"
+      [ngStyle]="{
+        color: activePath == '/' ? 'var(--primary)' : 'currentColor'
+      }"
+      >HOME</a
+    >
+    <a
+      href="#"
+      routerLink="/shop"
+      [ngStyle]="{
+        color: activePath == '/shop' ? 'var(--primary)' : 'currentColor'
+      }"
+      >SHOP</a
+    >
+  </nav>
+
+  <!-- Buttons -->
+  <div class="flex items-center">
+    <a href="#" routerLink="/cart" class="mr-12">
+      <mat-icon class="text-[#772953] text-4xl">shopping_cart</mat-icon>
+    </a>
+    <a href="#" routerLink="/login" class="hover-btn mr-4">Login</a>
+    <a href="#" routerLink="/signup" class="hover-btn">Sign up</a>
+  </div>
+</header>
