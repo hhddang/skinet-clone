@@ -18,6 +18,5 @@ export class BreadcrumbComponent {
         this.paths.push(this.paths[index - 1] + '/' + key);
       }
     });
-    console.log(this.paths);
   }
 }

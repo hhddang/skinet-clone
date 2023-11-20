@@ -1,0 +1,10 @@
+<ul class="flex flex-col">
+  <li
+    *ngFor="let item of itemList; index as i"
+    class="px-5 py-2.5 rounded-lg transition duration-100 cursor-pointer hover:bg-orange-600 hover:text-white hover:opacity-80"
+    [ngClass]="i == activeIndex ? 'bg-orange-600 text-white' : ''"
+    (click)="changeIndex(i)"
+  >
+    {{ item }}
+  </li>
+</ul>

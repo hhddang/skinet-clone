@@ -11,6 +11,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavItemComponent } from './components/nav-item/nav-item.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { SelectFilterComponent } from './components/select-filter/select-filter.component';
+import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-filter.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     HeaderComponent,
     NavItemComponent,
     BreadcrumbComponent,
+    SelectFilterComponent,
+    DropdownFilterComponent,
   ],
   imports: [
     BrowserModule,

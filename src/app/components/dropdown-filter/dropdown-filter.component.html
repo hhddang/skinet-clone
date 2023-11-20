@@ -1,0 +1,18 @@
+<div class="relative">
+  <select
+    id="sort"
+    (change)="changeOption($event)"
+    class="px-3 py-2 rounded w-full outline-none border focus:border-[#f4ad94] focus:shadow-[0_0_0_3px_rgba(233,84,32,.25)]"
+  >
+    <option value="alphabetical">Alphabetical</option>
+    <option value="low-to-high">Price: Low to High</option>
+    <option value="high-to-low">Price: High to Low</option>
+  </select>
+  <label
+    for="sort"
+    class="flex flex-col absolute right-2 top-1/2 translate-y-[-50%]"
+  >
+    <mat-icon class="mb-[-16px]">arrow_drop_up</mat-icon>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </label>
+</div>
