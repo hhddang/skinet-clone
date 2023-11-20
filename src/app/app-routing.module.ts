@@ -5,13 +5,13 @@ import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 const routes: Routes = [
-  {path: "", component: HomePageComponent},
-  {path: "shop", component: ShopPageComponent},
-  {path: "cart", component: CartPageComponent},
+  { path: '', component: HomePageComponent },
+  { path: 'shop', component: ShopPageComponent },
+  { path: 'cart', component: CartPageComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

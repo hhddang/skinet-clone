@@ -1,3 +1,52 @@
 <div class="pt-[var(--mobile-header-height)] md:pt-[var(--header-height)]">
-  <p>shop-page works!</p>
+  <!--  -->
+  <div class="flex px-[15%] h-[170px] items-center bg-[#f5f5f5]">
+    <div class="w-9/12">
+      <h1 class="text-4xl">Shop</h1>
+    </div>
+    <div class="3/12">
+      <app-breadcrumb />
+    </div>
+  </div>
+
+  <div class="flex px-[15%] border">
+    <!-- Filters -->
+    <div class="w-3/12 px-4 border">
+      <!-- Sort -->
+      <p class="mt-6 ml-4 mb-4 text-xl text-[var(--primary)]">Sort</p>
+      <div class="sort-selection">
+        <select
+          id="sort"
+          class="px-3 py-2 border rounded w-full cursor-pointer"
+        >
+          <option value="alphabetical">Alphabetical</option>
+          <option value="low-to-high">Price: Low to High</option>
+          <option value="high-to-low">Price: High to Low</option>
+        </select>
+        <label for="sort" class="sort-selection-icon flex flex-col">
+          <mat-icon>arrow_drop_up</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </label>
+      </div>
+
+      <!-- Brands -->
+      <p class="mt-6 ml-4 mb-4 text-xl text-[var(--primary)]">Brands</p>
+      <ul class="flex flex-col">
+        <li *ngFor="let brand of brands" class="px-5 py-2.5">
+          {{ brand }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="w-9/12">
+      <!-- Search -->
+      <div></div>
+
+      <!-- Product list -->
+      <div></div>
+
+      <!-- Pagination -->
+      <div></div>
+    </div>
+  </div>
 </div>
