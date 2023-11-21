@@ -13,6 +13,7 @@ import { NavItemComponent } from './components/nav-item/nav-item.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { SelectFilterComponent } from './components/select-filter/select-filter.component';
 import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-f
     AppRoutingModule,
     MatIconModule,
     BrowserAnimationsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

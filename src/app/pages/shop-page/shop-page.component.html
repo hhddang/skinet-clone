@@ -1,17 +1,17 @@
 <div class="pt-[var(--mobile-header-height)] md:pt-[var(--header-height)]">
   <!-- Title -->
-  <div class="flex px-[15%] h-[170px] items-center bg-[#f5f5f5]">
+  <section class="flex px-[15%] h-[170px] items-center bg-[#f5f5f5]">
     <div class="w-9/12">
       <h1 class="text-4xl">Shop</h1>
     </div>
     <div class="3/12">
       <app-breadcrumb />
     </div>
-  </div>
+  </section>
 
-  <div class="flex px-[15%]">
+  <div class="flex px-[15%] mt-3">
     <!-- Filters -->
-    <div class="w-3/12 px-4">
+    <section class="w-3/12 px-4">
       <!-- Sort -->
       <p class="mt-6 ml-4 mb-4 text-xl text-[var(--primary)]">Sort</p>
       <app-dropdown-filter (select)="changeSortOption($event)" />
@@ -23,17 +23,40 @@
       <!-- Types -->
       <p class="mt-6 ml-4 mb-4 text-xl text-[var(--primary)]">Types</p>
       <app-select-filter [itemList]="types" (select)="changeType($event)" />
-    </div>
+    </section>
 
-    <div class="w-9/12">
+    <section class="w-9/12 px-4">
       <!-- Search -->
-      <div></div>
+      <div class="flex justify-between items-center mt-5 mb-2">
+        <p *ngIf="false">There are 0 results for this filter</p>
+        <p>Showing <b>1-6</b> of <b>18</b> Results</p>
+        <div class="flex gap-2">
+          <input
+            id="search"
+            type="text"
+            placeholder="Search"
+            [(ngModel)]="searchText"
+            class="w-[300px] border rounded py-1.5 px-2.5 outline-none focus:border-[#f4ad94] focus:shadow-[0_0_0_3px_rgba(233,84,32,.25)]"
+          />
+          <button
+            class="py-1.5 px-2.5 border rounded border-orange-500 text-orange-500 hover:text-white hover:bg-orange-500"
+            (click)="applySearch()"
+          >
+            Search
+          </button>
+          <button
+            class="py-1.5 px-2.5 border rounded border-green-500 text-green-500 hover:text-white hover:bg-green-500"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
 
       <!-- Product list -->
       <div></div>
 
       <!-- Pagination -->
       <div></div>
-    </div>
+    </section>
   </div>
 </div>

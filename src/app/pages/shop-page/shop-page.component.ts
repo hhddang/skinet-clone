@@ -18,6 +18,15 @@ export class ShopPageComponent {
 
   types: string[] = ['All', 'Boards', 'Hats', 'Boots', 'Gloves'];
 
+  searchText: string = '';
+
+  constructor() {
+    const search = document.getElementById('search');
+    search!.addEventListener('change', () => {
+      console.log('Click Event Details: ');
+    });
+  }
+
   changeSortOption = (newSortOption: string) => {
     console.log('New sort option: ', newSortOption);
   };
@@ -28,5 +37,9 @@ export class ShopPageComponent {
 
   changeType = (newType: string) => {
     console.log('New type: ', newType);
+  };
+
+  applySearch = () => {
+    console.log('New search: ', this.searchText);
   };
 }
