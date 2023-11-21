@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+type Item = {
+  text: string;
+  value: string;
+};
 
 @Component({
   selector: 'app-dropdown-filter',
@@ -6,10 +11,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./dropdown-filter.component.scss'],
 })
 export class DropdownFilterComponent {
-  @Output()
-  select = new EventEmitter<string>();
+  @Input() itemList!: Item[];
 
-  changeOption = (option: any) => {
-    this.select.emit(option.target.value);
+  @Input() activeValue!: string;
+
+  @Output() select = new EventEmitter<string>();
+
+  changeValue = (value: string) => {
+    this.activeValue = value;
+    this.select.emit(value);
   };
 }
