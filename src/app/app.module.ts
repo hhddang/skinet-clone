@@ -14,6 +14,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { SelectFilterComponent } from './components/select-filter/select-filter.component';
 import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-filter.component';
 import { FormsModule } from '@angular/forms';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     BreadcrumbComponent,
     SelectFilterComponent,
     DropdownFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

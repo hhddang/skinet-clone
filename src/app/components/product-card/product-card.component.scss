@@ -1,0 +1,22 @@
+.image-box {
+  img {
+    transition: ease-out 400ms;
+    opacity: 1;
+  }
+  .buttons {
+    transition: ease-out 400ms;
+    gap: 100px;
+    opacity: 0;
+  }
+
+  &:hover {
+    img {
+      opacity: 0.5;
+    }
+
+    .buttons {
+      gap: 20px;
+      opacity: 1;
+    }
+  }
+}

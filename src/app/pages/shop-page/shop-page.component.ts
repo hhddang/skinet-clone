@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { DropdownFilterComponent } from 'src/app/components/dropdown-filter/dropdown-filter.component';
 import { SelectFilterComponent } from 'src/app/components/select-filter/select-filter.component';
+import { Product } from 'src/app/models/product';
 import { FilterSearchService } from 'src/app/service/filterSearch/filter-search.service';
+import { ProductService } from 'src/app/service/product/product.service';
 
 @Component({
   selector: 'app-shop-page',
@@ -48,17 +50,24 @@ export class ShopPageComponent implements OnInit {
 
   search: string = '';
 
+  products: Product[] = [];
+
   @ViewChild('sortFilter') sortFilter!: DropdownFilterComponent;
   @ViewChild('brandFilter') brandFilter!: SelectFilterComponent;
   @ViewChild('typeFilter') typeFilter!: SelectFilterComponent;
 
-  constructor(private filterSearchService: FilterSearchService) {}
+  constructor(
+    private filterSearchService: FilterSearchService,
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
     this.filterSearchService.setFilterSerch(this.filterSearchObj);
     this.filterSearchService.filterSearch$.subscribe((filterSearch) => {
       console.log(filterSearch);
     });
+
+    this.products = this.productService.getAll();
   }
 
   changeSort = (sort: string) => {

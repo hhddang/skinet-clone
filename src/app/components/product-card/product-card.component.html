@@ -1,0 +1,34 @@
+<div class="shadow rounded-sm">
+  <div class="relative image-box">
+    <img
+      src="{{ product.pictureUrl }}"
+      alt="{{ product.name }}"
+      class="w-full bg-green-500 rounded-t-sm"
+    />
+    <div
+      class="buttons w-full h-full absolute top-0 left-0 flex items-center justify-center"
+    >
+      <button
+        class="w-20 h-10 rounded bg-[var(--primary)] transition duration-300 ease-in hover:bg-orange-500"
+      >
+        <mat-icon class="text-white text-xl"> shopping_cart </mat-icon>
+      </button>
+      <a
+        href="#"
+        routerLink="/product/{{ product.id }}"
+        class="w-20 h-10 rounded bg-[var(--primary)] transition duration-300 ease-in hover:bg-orange-500 flex items-center justify-center text-white"
+      >
+        View
+      </a>
+    </div>
+  </div>
+  <div class="p-5 flex flex-col h-[120px]">
+    <a
+      href="#"
+      routerLink="/product/{{ product.id }}"
+      class="text-[var(--primary)] mb-3 hover:underline"
+      >{{ product.name | uppercase }}</a
+    >
+    <span>{{ product.price | currency }}</span>
+  </div>
+</div>
