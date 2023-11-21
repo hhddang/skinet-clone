@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DropdownFilterComponent } from 'src/app/components/dropdown-filter/dropdown-filter.component';
+import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 import { SelectFilterComponent } from 'src/app/components/select-filter/select-filter.component';
 import { Product } from 'src/app/models/product';
 import { FilterSearchService } from 'src/app/service/filterSearch/filter-search.service';
@@ -41,11 +42,12 @@ export class ShopPageComponent implements OnInit {
     { text: 'Gloves', value: 'gloves' },
   ];
 
-  filterSearchObj = {
+  filterSearchObj: Object = {
     sort: 'name',
     brand: 'all',
     type: 'all',
     search: '',
+    page: 1,
   };
 
   search: string = '';
@@ -55,6 +57,7 @@ export class ShopPageComponent implements OnInit {
   @ViewChild('sortFilter') sortFilter!: DropdownFilterComponent;
   @ViewChild('brandFilter') brandFilter!: SelectFilterComponent;
   @ViewChild('typeFilter') typeFilter!: SelectFilterComponent;
+  @ViewChild('pagination') pagination!: PaginationComponent;
 
   constructor(
     private filterSearchService: FilterSearchService,
@@ -64,7 +67,8 @@ export class ShopPageComponent implements OnInit {
   ngOnInit(): void {
     this.filterSearchService.setFilterSerch(this.filterSearchObj);
     this.filterSearchService.filterSearch$.subscribe((filterSearch) => {
-      console.log(filterSearch);
+      this.filterSearchObj = filterSearch;
+      console.log(this.filterSearchObj);
     });
 
     this.products = this.productService.getAll();
@@ -86,16 +90,22 @@ export class ShopPageComponent implements OnInit {
     this.filterSearchService.setFilterSerch({ search: this.search });
   };
 
+  changePage = (page: number) => {
+    this.filterSearchService.setFilterSerch({ page });
+  };
+
   clearFilterSearch() {
     this.filterSearchService.setFilterSerch({
       sort: 'name',
       brand: 'all',
       type: 'all',
       search: '',
+      page: 1,
     });
     this.sortFilter?.changeValue('name');
     this.brandFilter?.changeValue('all');
     this.typeFilter?.changeValue('all');
     this.search = '';
+    this.pagination.changePage(1);
   }
 }
