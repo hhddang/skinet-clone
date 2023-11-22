@@ -4,6 +4,7 @@ import { PaginationComponent } from 'src/app/components/pagination/pagination.co
 import { SelectFilterComponent } from 'src/app/components/select-filter/select-filter.component';
 import { FilterSearch } from 'src/app/models/filterSearch';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/service/cart/cart.service';
 import { FilterSearchService } from 'src/app/service/filterSearch/filter-search.service';
 import { ProductService } from 'src/app/service/product/product.service';
 
