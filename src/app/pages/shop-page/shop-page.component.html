@@ -43,8 +43,13 @@
     <section class="w-9/12 px-4">
       <!-- Search -->
       <div class="flex justify-between items-center mt-2.5 mb-5">
-        <p *ngIf="false">There are 0 results for this filter</p>
-        <p>Showing <b>1-6</b> of <b>18</b> Results</p>
+        <p *ngIf="productCount! <= 0">There are 0 results for this filter</p>
+        <p *ngIf="productCount! > 0">
+          Showing
+          <b> {{ minProductIndex }}-{{ maxProductIndex }} </b>
+          of
+          <b>{{ productCount }}</b> Results
+        </p>
         <div class="flex gap-2">
           <input
             id="search"
@@ -77,10 +82,10 @@
       </div>
 
       <!-- Pagination -->
-      <div class="mt-8 mb-5 flex justify-center">
+      <div class="mt-8 mb-5 flex justify-center" *ngIf="productCount! > 0">
         <app-pagination
           #pagination
-          [pageCount]="10"
+          [pageCount]="pageCount"
           (change)="changePage($event)"
         />
       </div>

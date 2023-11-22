@@ -1,13 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DropdownFilterComponent } from 'src/app/components/dropdown-filter/dropdown-filter.component';
 import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 import { SelectFilterComponent } from 'src/app/components/select-filter/select-filter.component';
+import { FilterSearch } from 'src/app/models/filterSearch';
 import { Product } from 'src/app/models/product';
 import { FilterSearchService } from 'src/app/service/filterSearch/filter-search.service';
 import { ProductService } from 'src/app/service/product/product.service';
@@ -36,23 +31,28 @@ export class ShopPageComponent implements OnInit {
 
   TYPES = [
     { text: 'All', value: 'all' },
-    { text: 'Broads', value: 'broads' },
+    { text: 'Boards', value: 'boards' },
     { text: 'Hats', value: 'hats' },
     { text: 'Boots', value: 'boots' },
     { text: 'Gloves', value: 'gloves' },
   ];
 
-  filterSearchObj: Object = {
+  filterSearchObj: FilterSearch = {
     sort: 'name',
     brand: 'all',
     type: 'all',
     search: '',
     page: 1,
+    productPerPage: 6,
   };
 
   search: string = '';
 
   products: Product[] = [];
+  productCount: number | undefined;
+  minProductIndex: number = 1;
+  maxProductIndex: number = 99;
+  pageCount: number = 1;
 
   @ViewChild('sortFilter') sortFilter!: DropdownFilterComponent;
   @ViewChild('brandFilter') brandFilter!: SelectFilterComponent;
@@ -66,32 +66,64 @@ export class ShopPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterSearchService.setFilterSerch(this.filterSearchObj);
-    this.filterSearchService.filterSearch$.subscribe((filterSearch) => {
-      this.filterSearchObj = filterSearch;
-      console.log(this.filterSearchObj);
+    this.filterSearchService.getFilterSearch().subscribe((filterSearch) => {
+      this.filterSearchObj = filterSearch!;
     });
 
-    this.products = this.productService.getAll();
+    this.productService.getAll(this.filterSearchObj).subscribe((res) => {
+      if (res) {
+        this.products = res.products;
+        this.productCount = res.count;
+        this.minProductIndex = res.productPerPage * (res.page - 1) + 1;
+        this.maxProductIndex = (() => {
+          if (this.productCount > res.productPerPage) {
+            return Math.min(res.productPerPage * res.page, this.productCount);
+          }
+          return this.productCount;
+        })();
+        this.pageCount = Math.ceil(this.productCount / res.productPerPage);
+      }
+    });
+
+    const searchBar = document.getElementById('search');
+    searchBar?.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        this.applySearch();
+      }
+    });
+    searchBar?.addEventListener('input', (event) => {
+      if (this.search === '') {
+        this.applySearch();
+      }
+    });
   }
 
   changeSort = (sort: string) => {
     this.filterSearchService.setFilterSerch({ sort });
+    this.productService.query(this.filterSearchObj);
   };
 
   changeBrand = (brand: string) => {
     this.filterSearchService.setFilterSerch({ brand });
+    this.productService.query({ ...this.filterSearchObj, page: 1 });
+    this.pagination?.changePage(1);
   };
 
   changeType = (type: string) => {
     this.filterSearchService.setFilterSerch({ type });
+    this.productService.query({ ...this.filterSearchObj, page: 1 });
+    this.pagination?.changePage(1);
   };
 
   applySearch = () => {
     this.filterSearchService.setFilterSerch({ search: this.search });
+    this.productService.query({ ...this.filterSearchObj, page: 1 });
+    this.pagination?.changePage(1);
   };
 
   changePage = (page: number) => {
     this.filterSearchService.setFilterSerch({ page });
+    this.productService.query(this.filterSearchObj);
   };
 
   clearFilterSearch() {
@@ -106,6 +138,7 @@ export class ShopPageComponent implements OnInit {
     this.brandFilter?.changeValue('all');
     this.typeFilter?.changeValue('all');
     this.search = '';
-    this.pagination.changePage(1);
+    this.pagination?.changePage(1);
+    this.productService.query(this.filterSearchObj);
   }
 }

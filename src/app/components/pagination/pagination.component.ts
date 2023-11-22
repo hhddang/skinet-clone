@@ -15,9 +15,28 @@ export class PaginationComponent {
 
   @Output() change = new EventEmitter<number>();
 
-  ngOnInit() {
+  ngOnChanges() {
     this.maxPage = Math.min(this.pageCount, this.showedPageCount);
     this.calculatePages();
+  }
+
+  changePage(page: number) {
+    if (page == this.activePage) return;
+    this.activePage = page;
+
+    if (this.pageCount > this.showedPageCount) {
+      this.minPage = Math.min(
+        Math.max(1, this.activePage - 2),
+        this.pageCount - this.showedPageCount + 1
+      );
+      this.maxPage = Math.max(
+        Math.min(this.pageCount, this.activePage + 2),
+        this.showedPageCount
+      );
+    }
+
+    this.calculatePages();
+    this.change.emit(page);
   }
 
   calculatePages() {
@@ -25,20 +44,5 @@ export class PaginationComponent {
     for (let i = this.minPage; i <= this.maxPage; i++) {
       this.pages.push(i);
     }
-  }
-
-  changePage(page: number) {
-    if (page == this.activePage) return;
-    this.activePage = page;
-    this.minPage = Math.min(
-      Math.max(1, this.activePage - 2),
-      this.pageCount - this.showedPageCount + 1
-    );
-    this.maxPage = Math.max(
-      Math.min(this.pageCount, this.activePage + 2),
-      this.showedPageCount
-    );
-    this.calculatePages();
-    this.change.emit(page);
   }
 }
