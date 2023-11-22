@@ -284,4 +284,8 @@ export class ProductService {
       products,
     });
   }
+
+  getById(id: number) {
+    return this.products.filter((product) => product.id == id)[0];
+  }
 }

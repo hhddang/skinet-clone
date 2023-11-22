@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 
 @Component({
@@ -6,6 +6,11 @@ import { Product } from 'src/app/models/product';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
+  path: string = '';
+
+  ngOnInit(): void {
+    this.path = this.product.name.toLowerCase().replaceAll(' ', '-');
+  }
 }

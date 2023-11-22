@@ -16,6 +16,7 @@ import { DropdownFilterComponent } from './components/dropdown-filter/dropdown-f
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     DropdownFilterComponent,
     ProductCardComponent,
     PaginationComponent,
+    ProductPageComponent,
   ],
   imports: [
     BrowserModule,
