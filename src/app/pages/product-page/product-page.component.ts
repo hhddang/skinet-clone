@@ -34,6 +34,5 @@ export class ProductPageComponent implements OnInit {
 
   addToCart(product: Product, count: number) {
     this.cartService.addCartItem(product, count);
-    console.log(this.cartService.getAll());
   }
 }

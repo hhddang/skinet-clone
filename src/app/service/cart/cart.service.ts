@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Cart, CartItem } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
 
@@ -6,26 +7,28 @@ import { Product } from 'src/app/models/product';
   providedIn: 'root',
 })
 export class CartService {
+  private cartSource = new BehaviorSubject<Cart | null>(null);
+  cartSource$ = this.cartSource.asObservable();
+
+  constructor() {
+    const stringCart = localStorage.getItem('cart')?.toString() || '[]';
+    this.cartSource.next(JSON.parse(stringCart));
+  }
+
   private isExisted(product: Product): Boolean {
-    const cart = this.getAll();
+    const cart = this.cartSource.value!;
     if (cart.filter((item) => item.product.name == product.name).length) {
       return true;
     }
     return false;
   }
 
-  private writeCartToLocalStorage(cart: Cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }
-
-  public getAll(): Cart {
-    var stringCart = localStorage.getItem('cart')?.toString() || '[]';
-    const cart = <Cart>JSON.parse(stringCart);
-    return cart;
+  private writeCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(this.cartSource.value!));
   }
 
   public addCartItem(product: Product, count: number) {
-    const cart = this.getAll();
+    const cart = this.cartSource.value!;
     if (this.isExisted(product)) {
       const cartItem = cart.filter(
         (item) => item.product.name == product.name
@@ -38,21 +41,24 @@ export class CartService {
       };
       cart.push(newCartItem);
     }
-    this.writeCartToLocalStorage(cart);
+    this.cartSource.next(cart);
+    this.writeCartToLocalStorage();
   }
 
   public changeCartItemQuantity(product: Product, count: number) {
-    const cart = this.getAll();
+    const cart = this.cartSource.value!;
     const cartItem = cart.filter(
       (item) => item.product.name == product.name
     )[0];
     cartItem.count = count;
-    this.writeCartToLocalStorage(cart);
+    this.cartSource.next(cart);
+    this.writeCartToLocalStorage();
   }
 
   public removeCartItem(product: Product) {
-    const cart = this.getAll();
+    const cart = this.cartSource.value!;
     const newCart = cart.filter((item) => item.product.name != product.name);
-    this.writeCartToLocalStorage(newCart);
+    this.cartSource.next(newCart);
+    this.writeCartToLocalStorage();
   }
 }

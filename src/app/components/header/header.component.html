@@ -14,8 +14,14 @@
 
   <!-- Buttons -->
   <div class="hidden md:flex items-center">
-    <a href="#" routerLink="/cart" class="mr-12">
+    <a href="#" routerLink="/cart" class="mr-12 relative">
       <mat-icon class="text-[#772953] text-4xl">shopping_cart</mat-icon>
+      <span
+        *ngIf="count > 0"
+        class="absolute bg-red-500 rounded-full w-6 h-6 text-white text-center right-[-8px] top-[-8px]"
+      >
+        {{ count }}
+      </span>
     </a>
     <a href="#" routerLink="/login" class="hover-btn mr-4">Login</a>
     <a href="#" routerLink="/signup" class="hover-btn">Sign up</a>
