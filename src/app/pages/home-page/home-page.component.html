@@ -1,62 +1,89 @@
-<!-- Image slider -->
-<div class="relative">
-  <!-- Image list -->
-  <div
-    class="image-list flex max-h-[600px] w-fit transition-all duration-500"
-    [style.margin-left.%]="activeSlideIndex * -100"
-  >
-    <img
-      src="./assets/images/hero1.jpg"
-      alt="hero1"
-      class="w-screen max-w-none object-cover"
-    />
-    <img
-      src="./assets/images/hero2.jpg"
-      alt="hero2"
-      class="w-screen max-w-none object-cover"
-    />
-    <img
-      src="./assets/images/hero3.jpg"
-      alt="hero3"
-      class="w-screen max-w-none"
-    />
+<div class="flex flex-col gap-3 pt-[var(--mobile-header-height)] md:mt-0">
+  <!-- Image slider -->
+  <div class="hidden md:block">
+    <div class="relative">
+      <!-- Image list -->
+      <div
+        class="image-list flex max-h-[600px] w-fit transition-all duration-500"
+        [style.margin-left.%]="activeSlideIndex * -100"
+      >
+        <img
+          src="./assets/images/hero1.jpg"
+          alt="hero1"
+          class="w-screen max-w-none object-cover"
+        />
+        <img
+          src="./assets/images/hero2.jpg"
+          alt="hero2"
+          class="w-screen max-w-none object-cover"
+        />
+        <img
+          src="./assets/images/hero3.jpg"
+          alt="hero3"
+          class="w-screen max-w-none object-cover"
+        />
+      </div>
+
+      <!-- To-prev-slide button  -->
+      <button
+        (click)="toPrevSlide()"
+        class="absolute top-1/2 translate-y-[-50%] w-1/6 h-full text-slate-300 hover:text-slate-50 transition duration-75"
+      >
+        <mat-icon class="font-black">arrow_back_ios</mat-icon>
+      </button>
+
+      <!-- To-next-slide button  -->
+      <button
+        (click)="toNextSlide()"
+        class="absolute top-1/2 right-0 translate-y-[-50%] h-full w-1/6 text-slate-300 hover:text-slate-50 transition duration-75"
+      >
+        <mat-icon class="font-black">arrow_forward_ios</mat-icon>
+      </button>
+
+      <!-- Selection buttons -->
+      <div class="absolute bottom-[3%] left-1/2 translate-x-[-50%] flex gap-3">
+        <button
+          class="w-8 h-1"
+          [ngClass]="activeSlideIndex == 0 ? 'bg-slate-50' : 'bg-slate-300'"
+          (click)="toSlide(0)"
+        ></button>
+        <button
+          class="w-8 h-1"
+          [ngClass]="activeSlideIndex == 1 ? 'bg-slate-50' : 'bg-slate-300'"
+          (click)="toSlide(1)"
+        ></button>
+        <button
+          class="w-8 h-1"
+          [ngClass]="activeSlideIndex == 2 ? 'bg-slate-50' : 'bg-slate-300'"
+          (click)="toSlide(2)"
+        ></button>
+      </div>
+    </div>
   </div>
 
-  <!-- To-prev-slide button  -->
-  <button
-    (click)="toPrevSlide()"
-    class="absolute top-1/2 translate-y-[-50%] w-1/6 h-full text-slate-300 hover:text-slate-50 transition duration-75"
-  >
-    <mat-icon class="font-black">arrow_back_ios</mat-icon>
-  </button>
+  <!-- Welcome message -->
+  <p class="text-2xl md:text-4xl mt-5 md:mt-0 text-center">
+    Welcome to the Shop!
+  </p>
 
-  <!-- To-next-slide button  -->
-  <button
-    (click)="toNextSlide()"
-    class="absolute top-1/2 right-0 translate-y-[-50%] h-full w-1/6 text-slate-300 hover:text-slate-50 transition duration-75"
-  >
-    <mat-icon class="font-black">arrow_forward_ios</mat-icon>
-  </button>
-
-  <!-- Selection buttons -->
-  <div class="absolute bottom-[3%] left-1/2 translate-x-[-50%] flex gap-3">
-    <button
-      class="w-8 h-1"
-      [ngClass]="activeSlideIndex == 0 ? 'bg-slate-50' : 'bg-slate-300'"
-      (click)="toSlide(0)"
-    ></button>
-    <button
-      class="w-8 h-1"
-      [ngClass]="activeSlideIndex == 1 ? 'bg-slate-50' : 'bg-slate-300'"
-      (click)="toSlide(1)"
-    ></button>
-    <button
-      class="w-8 h-1"
-      [ngClass]="activeSlideIndex == 2 ? 'bg-slate-50' : 'bg-slate-300'"
-      (click)="toSlide(2)"
-    ></button>
+  <!-- Mobile images list -->
+  <div class="md:hidden">
+    <div class="flex flex-col gap-2 mx-2">
+      <img
+        src="./assets/images/hero1.jpg"
+        alt="hero1"
+        class="w-full rounded shadow"
+      />
+      <img
+        src="./assets/images/hero2.jpg"
+        alt="hero2"
+        class="w-full rounded shadow"
+      />
+      <img
+        src="./assets/images/hero3.jpg"
+        alt="hero3"
+        class="w-full rounded shadow"
+      />
+    </div>
   </div>
 </div>
-
-<!-- Welcome message -->
-<p class="text-4xl mt-5 text-center">Welcome to the Shop!</p>

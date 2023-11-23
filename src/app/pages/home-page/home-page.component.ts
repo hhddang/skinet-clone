@@ -22,10 +22,10 @@ export class HomePageComponent implements OnInit {
       endClientX = (event as DragEvent).clientX;
       //  Slide whether drag distance is larger or equal to 200
       if (beginClientX + 200 <= endClientX) {
-        this.toNextSlide();
+        this.toPrevSlide();
       }
       if (endClientX + 200 <= beginClientX) {
-        this.toPrevSlide();
+        this.toNextSlide();
       }
     });
   }
