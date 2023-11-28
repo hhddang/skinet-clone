@@ -1,0 +1,63 @@
+<div class="flex border">
+  <!-- First page btn -->
+  <button
+    class="w-8 h-10 border-r flex items-center justify-center"
+    [ngClass]="
+      activePage == 1
+        ? 'text-orange-100 pointer-events-none'
+        : 'text-[var(--primary)]'
+    "
+    (click)="changePage(1)"
+  >
+    <mat-icon>first_page</mat-icon>
+  </button>
+
+  <!-- Prev page btn -->
+  <button
+    class="w-8 h-10 border-r flex items-center justify-center"
+    [ngClass]="
+      activePage == 1
+        ? 'text-orange-100 pointer-events-none'
+        : 'text-[var(--primary)]'
+    "
+    (click)="changePage(activePage - 1)"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <!-- Select page btns -->
+  <button
+    *ngFor="let page of pages"
+    class="w-8 h-10 border-r text-[var(--primary)] transition duration-300"
+    [ngClass]="page == activePage ? 'text-white bg-[var(--primary)]' : ''"
+    (click)="changePage(page)"
+  >
+    {{ page }}
+  </button>
+
+  <!-- Next page btn -->
+  <button
+    class="w-8 h-10 border-r flex items-center justify-center"
+    [ngClass]="
+      activePage == pageCount
+        ? 'text-orange-100 pointer-events-none'
+        : 'text-[var(--primary)]'
+    "
+    (click)="changePage(activePage + 1)"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+
+  <!-- Last page btn -->
+  <button
+    class="w-8 h-10 flex items-center justify-center"
+    [ngClass]="
+      activePage == pageCount
+        ? 'text-orange-100 pointer-events-none'
+        : 'text-[var(--primary)]'
+    "
+    (click)="changePage(pageCount)"
+  >
+    <mat-icon>last_page</mat-icon>
+  </button>
+</div>

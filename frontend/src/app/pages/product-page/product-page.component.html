@@ -1,0 +1,56 @@
+<div class="pt-[var(--mobile-header-height)] md:pt-[var(--header-height)]">
+  <!-- Title -->
+  <section class="px-[15%] h-[170px] items-center bg-[#f5f5f5] hidden md:flex">
+    <div class="w-9/12">
+      <h1 class="text-4xl">{{ product.name }}</h1>
+    </div>
+    <div class="3/12">
+      <app-breadcrumb activeTitle="{{ product.name }}" />
+    </div>
+  </section>
+
+  <div
+    class="flex flex-col items-center px-2 mt-8 gap-8 md:flex-row lg:px-[15%]"
+  >
+    <div class="md:w-1/2">
+      <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" />
+    </div>
+    <div class="md:w-1/2 flex flex-col gap-3">
+      <!-- Info -->
+      <h1 class="text-4xl">{{ product.name }}</h1>
+      <p class="text-3xl">{{ product.price | currency }}</p>
+
+      <!-- Quantity control and Cart -->
+      <div class="flex items-center gap-6 md:gap-12 flex-wrap">
+        <!-- Quantity control button-->
+        <div class="flex items-center gap-4">
+          <button
+            (click)="changeCount(count - 1)"
+            class="w-10 h-10 rounded-full bg-[var(--primary)] text-3xl text-white"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span class="text-3xl">{{ count }}</span>
+          <button
+            (click)="changeCount(count + 1)"
+            class="w-10 h-10 rounded-full bg-[var(--primary)] text-3xl text-white"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <!-- Add to cart button -->
+        <button
+          (click)="addToCart(product, count)"
+          class="p-3 text-[var(--primary)] border border-[var(--primary)] rounded hover:text-white hover:bg-[var(--primary)] transition duration-300"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Description -->
+      <p class="text-4xl">Description</p>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</div>

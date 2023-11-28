@@ -1,0 +1,185 @@
+<div class="pt-[var(--mobile-header-height)] md:pt-[var(--header-height)] mb-8">
+  <!-- Title -->
+  <section class="px-[15%] h-[170px] items-center bg-[#f5f5f5] hidden md:flex">
+    <div class="w-9/12">
+      <h1 class="text-4xl">Cart</h1>
+    </div>
+    <div class="3/12">
+      <app-breadcrumb />
+    </div>
+  </section>
+
+  <div class="mt-2 md:mt-8 flex flex-col justify-center px-3 lg:px-[15%]">
+    <!-- Message whther cart is empty -->
+    <div *ngIf="cart.length <= 0" class="text-4xl">
+      <span>Your cart is empty. </span>
+      <a
+        href="#"
+        routerLink="/shop"
+        class="hover:underline text-[var(--primary)]"
+      >
+        Go shopping
+      </a>
+    </div>
+
+    <!-- Mobile product list -->
+    <div class="md:hidden">
+      <div *ngFor="let item of cart" class="flex border-b">
+        <img
+          src="{{ item.product.pictureUrl }}"
+          alt="{{ item.product.name }}"
+          class="w-1/3 object-contain"
+        />
+        <div class="w-2/3 px-2 m-2">
+          <a
+            class="inline-block align-text-bottom hover:underline hover:text-[var(--primary)] font-medium text-lg"
+            href="#"
+            routerLink="/shop/{{ item.product.id }}"
+          >
+            {{ item.product.name }}
+          </a>
+          <p>{{ item.product.price | currency }}</p>
+          <div class="flex justify-between gap-1">
+            <div class="flex items-center gap-1">
+              <button
+                (click)="descreaseItem(item)"
+                class="w-6 h-6 rounded-full bg-[var(--primary)] text-white"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="text-xl">{{ item.count }}</span>
+              <button
+                (click)="increaseItem(item)"
+                class="w-6 h-6 rounded-full bg-[var(--primary)] text-white"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <button
+              class="text-red-500 cursor-pointer hover:text-red-700 transition duration-300"
+              (click)="removeItem(item)"
+            >
+              <mat-icon class="text-4xl"> delete_forever </mat-icon>
+            </button>
+          </div>
+          <div class="flex justify-between">
+            <span>Subtotal: </span>
+            <span class="font-bold">{{
+              item.product.price * item.count | currency
+            }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table *ngIf="cart.length > 0" class="hidden md:table">
+      <!-- Header -->
+      <tr class="bg-orange-300">
+        <th>
+          <div class="p-2 text-lg">PRODUCT</div>
+        </th>
+        <th>
+          <div class="p-2 text-lg">PRICE</div>
+        </th>
+        <th>
+          <div class="p-2 text-lg">QUANTITY</div>
+        </th>
+        <th>
+          <div class="p-2 text-lg">TOTAL</div>
+        </th>
+        <th>
+          <div class="p-2 text-lg">REMOVE</div>
+        </th>
+      </tr>
+      <!-- Body -->
+      <tr *ngFor="let item of cart" class="border-b">
+        <!-- Image and Name -->
+        <td class="mr-8">
+          <div class="p-2 flex gap-1 h-20 items-center">
+            <img
+              src="{{ item.product.pictureUrl }}"
+              alt="{{ item.product.name }}"
+              class="h-full"
+            />
+            <a
+              class="inline-block align-text-bottom hover:underline hover:text-[var(--primary)] font-medium text-lg"
+              href="#"
+              routerLink="/shop/{{ item.product.id }}"
+            >
+              {{ item.product.name }}
+            </a>
+          </div>
+        </td>
+
+        <!-- Unit price -->
+        <td class="text-center text-lg">
+          {{ item.product.price | currency }}
+        </td>
+
+        <!-- Quantity -->
+        <td class="text-center">
+          <div class="flex items-center gap-1 justify-center">
+            <button
+              (click)="descreaseItem(item)"
+              class="w-6 h-6 rounded-full bg-[var(--primary)] text-white"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="text-xl">{{ item.count }}</span>
+            <button
+              (click)="increaseItem(item)"
+              class="w-6 h-6 rounded-full bg-[var(--primary)] text-white"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </td>
+
+        <!-- Total price -->
+        <td class="text-center text-lg">
+          {{ item.product.price * item.count | currency }}
+        </td>
+
+        <!-- Remove  -->
+        <td class="text-center">
+          <button
+            class="text-red-500 cursor-pointer hover:text-red-700 transition duration-300"
+            (click)="removeItem(item)"
+          >
+            <mat-icon class="text-4xl"> delete_forever </mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Summary -->
+    <div *ngIf="cart.length > 0" class="mt-12 flex justify-end">
+      <div class="md:w-1/3 gap-3">
+        <h1 class="bg-orange-300 p-3 text-lg font-bold">ORDER SUMMARY</h1>
+        <p class="px-3 py-3">
+          Shipping costs will be added depending on choices made during checkout
+        </p>
+        <div class="flex justify-between px-3 py-1 border-b">
+          <span class="text-gray-400 text-lg">Order subtotal</span>
+          <span class="text-lg">{{ subtotal | currency }}</span>
+        </div>
+        <div class="flex justify-between px-3 py-1 border-b">
+          <span class="text-gray-400 text-lg">Shipping</span>
+          <span class="text-lg">{{ shipping | currency }}</span>
+        </div>
+        <div class="flex justify-between px-3 py-1 border-b">
+          <span class="text-gray-400 text-lg">Total</span>
+          <span class="text-lg">{{ total | currency }}</span>
+        </div>
+        <div class="mt-4 text-center">
+          <button
+            class="p-3 w-full text-[var(--primary)] border border-[var(--primary)] rounded hover:text-white hover:bg-[var(--primary)] transition duration-300"
+          >
+            Proceed to checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

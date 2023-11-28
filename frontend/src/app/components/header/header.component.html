@@ -1,0 +1,81 @@
+<header
+  class="flex px-2 justify-between items-center shadow fixed bg-white w-full h-[var(--mobile-header-height)] z-20 md:px-8 md:flex-row md:h-[var(--header-height)]"
+>
+  <!-- Logo -->
+  <a href="#" routerLink="/">
+    <img src="./assets/images/logo.png" alt="logo" class="w-[170px] h-[65px]" />
+  </a>
+
+  <!-- Nav -->
+  <nav class="hidden md:flex gap-5 text-xl font-medium">
+    <app-nav-item path="/" text="HOME" />
+    <app-nav-item path="/shop" text="SHOP" />
+  </nav>
+
+  <!-- Buttons -->
+  <div class="hidden md:flex items-center">
+    <a href="#" routerLink="/cart" class="mr-12 relative">
+      <mat-icon class="text-[#772953] text-4xl">shopping_cart</mat-icon>
+      <span
+        *ngIf="count > 0"
+        class="absolute bg-red-500 rounded-full w-6 h-6 text-white text-center right-[-8px] top-[-8px]"
+      >
+        {{ count }}
+      </span>
+    </a>
+    <a href="#" routerLink="/login" class="hover-btn mr-4">Login</a>
+    <a href="#" routerLink="/signup" class="hover-btn">Sign up</a>
+  </div>
+
+  <!-- Phone navigation icon -->
+  <button class="md:hidden top-0 right-0" (click)="toggleMobileNav()">
+    <mat-icon class="text-[#772953] text-4xl">horizontal_split</mat-icon>
+  </button>
+
+  <!-- Phone navigation -->
+  <div
+    class="absolute md:hidden top-full left-0 h-screen w-full bg-gray-100"
+    [ngStyle]="{ display: openMobileNav ? 'block' : 'none' }"
+  >
+    <div class="flex flex-col">
+      <app-nav-item
+        path="/"
+        text="HOME"
+        class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/shop"
+        text="SHOP"
+        class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
+        (click)="toggleMobileNav()"
+      />
+      <div class="relative">
+        <app-nav-item
+          path="/cart"
+          text="CART"
+          class="px-3 py-4 border-b text-center hover:text-[var(--primary)] block w-full"
+          (click)="toggleMobileNav()"
+        />
+        <span
+          *ngIf="count > 0"
+          class="absolute bg-red-500 rounded-full w-6 h-6 text-white text-center bottom-1/2 left-[55%]"
+        >
+          {{ count }}
+        </span>
+      </div>
+      <app-nav-item
+        path="/login"
+        text="LOGIN"
+        class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
+        (click)="toggleMobileNav()"
+      />
+      <app-nav-item
+        path="/signup"
+        text="SIGN UP"
+        class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
+        (click)="toggleMobileNav()"
+      />
+    </div>
+  </div>
+</header>

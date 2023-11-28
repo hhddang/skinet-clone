@@ -1,0 +1,18 @@
+<div class="relative">
+  <select
+    id="sort"
+    [(ngModel)]="activeValue"
+    (change)="changeValue($any($event.target).value)"
+    class="px-3 py-2 rounded w-full outline-none border focus:border-[#f4ad94] focus:shadow-[0_0_0_3px_rgba(233,84,32,.25)]"
+  >
+    <option *ngFor="let item of itemList" value="{{ item.value }}">
+      {{ item.text }}
+    </option>
+  </select>
+  <label
+    for="sort"
+    class="flex items-center absolute right-2 top-1/2 translate-y-[-50%]"
+  >
+    <mat-icon>unfold_more</mat-icon>
+  </label>
+</div>
