@@ -48,6 +48,7 @@ export class ShopPageComponent implements OnInit {
   };
 
   search: string = '';
+  openFilterSearch: boolean = false;
 
   products: Product[] = [];
   productCount: number | undefined;
@@ -141,5 +142,14 @@ export class ShopPageComponent implements OnInit {
     this.search = '';
     this.pagination?.changePage(1);
     this.productService.query(this.filterSearchObj);
+  }
+
+  toggleFilterSearch() {
+    this.openFilterSearch = !this.openFilterSearch;
+  }
+
+  applySearchMobile() {
+    this.applySearch();
+    this.toggleFilterSearch();
   }
 }

@@ -1,7 +1,7 @@
 <ul class="flex flex-col">
   <li
     *ngFor="let item of itemList"
-    class="px-5 py-2.5 rounded-lg transition duration-100 cursor-pointer hover:bg-orange-500 hover:text-white hover:opacity-80"
+    class="py-1 md:py-2 px-5 rounded-lg transition duration-100 cursor-pointer hover:bg-orange-500 hover:text-white hover:opacity-80"
     [ngClass]="item.value == activeValue ? 'bg-orange-600 text-white' : ''"
     (click)="changeValue(item.value)"
   >

@@ -23,11 +23,11 @@
       </a>
     </div>
   </div>
-  <div class="p-5 flex flex-col h-[120px]">
+  <div class="p-5 flex flex-col">
     <a
       href="#"
       routerLink="/shop/{{ product.id }}"
-      class="text-[var(--primary)] mb-3 hover:underline"
+      class="text-[var(--primary)] mb-3 hover:underline h-[50px] product-name"
       >{{ product.name | uppercase }}</a
     >
     <span>{{ product.price | currency }}</span>
