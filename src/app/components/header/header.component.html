@@ -50,12 +50,20 @@
         class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
         (click)="toggleMobileNav()"
       />
-      <app-nav-item
-        path="/cart"
-        text="CART"
-        class="px-3 py-4 border-b text-center hover:text-[var(--primary)]"
-        (click)="toggleMobileNav()"
-      />
+      <div class="relative">
+        <app-nav-item
+          path="/cart"
+          text="CART"
+          class="px-3 py-4 border-b text-center hover:text-[var(--primary)] block w-full"
+          (click)="toggleMobileNav()"
+        />
+        <span
+          *ngIf="count > 0"
+          class="absolute bg-red-500 rounded-full w-6 h-6 text-white text-center bottom-1/2 left-[55%]"
+        >
+          {{ count }}
+        </span>
+      </div>
       <app-nav-item
         path="/login"
         text="LOGIN"
